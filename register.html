@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Registration Form</title>
+    <style>
+        h1, h2, h3 {
+            border-color: black;
+            border-width: 0.15em;
+            border-style: solid;
+            padding: 10px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .form-container input {
+            width: calc(100% - 22px); /* Adjust width to fit label and padding */
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .form-container button {
+            background-color: blue;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Registration Form:</h1>
+    </center>
+
+    <div class="form-container">
+        <form method="POST" id="registrationForm">
+            {% csrf_token %}
+
+            <label for="Name">Name</label>
+            <input type="text" id="Name" name="Name" size="20" required>
+
+            <label for="Email">Email</label>
+            <input type="email" id="Email" name="Email" size="15" required>
+
+            <label for="Password">Password</label>
+            <input type="password" id="Password" name="Password" size="15" required>
+
+            <label for="Confirm_Password">Confirm Password</label>
+            <input type="password" id="Confirm_Password" name="Confirm_Password" size="15" required>
+
+            <button type="submit" id="submitButton">Submit</button>
+            <a href="{% url 'login_page' %}" style="text-decoration: none;">Go to login page</a>
+        </form>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            // Perform validation or other logic here if needed
+            window.location.href = 'login.html'; // Redirect after form submission
+        });
+    </script>
+
+
+</body>
+</html>
